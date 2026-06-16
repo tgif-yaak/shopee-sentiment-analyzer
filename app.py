@@ -5,43 +5,49 @@ import re
 # 1. SETTING HALAMAN
 st.set_page_config(page_title="Shopee App Sentiment Analyzer", page_icon="🛍️", layout="centered")
 
-# Custom CSS Total Fix: Menyejajarkan Kolom & Mengunci Bentuk Kotak Kontainer
 st.markdown("""
     <style>
-    /* Mengubah background luar halaman menjadi OREN Shopee */
+    /* Mengubah background luar halaman menjadi OREN Shopee dan memaksa konten di tengah layar */
     .stApp {
         background-color: #EE4D2D !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        min-height: 100vh !important;
     }
 
+    /* Menghilangkan background header & memaksa tulisan 'Deploy' serta menu titik tiga jadi PUTIH */
     header[data-testid="stHeader"] {
         background-color: transparent !important;
     }
+    header[data-testid="stHeader"] * {
+        color: #FFFFFF !important;
+        fill: #FFFFFF !important;
+    }
     
-    /* REVISI: Mengunci bentuk KOTAK kontainer putih agar punya batas atas yang jelas */
+    /* REVISI MENGAMBANG SEMPURNA: Menggunakan margin auto agar jarak atas dan bawah terbagi rata otomatis */
     .block-container {
         background-color: #FFFFFF !important;
         padding: 40px !important;
         border-radius: 20px !important;
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
         max-width: 850px !important;
-        margin-bottom: 100px !important;
+        margin-top: auto !important;
+        margin-bottom: auto !important;
     }
             
     div[data-testid="stAppViewContainer"] > section {
-        padding-top: 60px !important; /* Ini yang bakal maksa warna oren muncul tebal di atas kotak putih! */
+        padding-top: 0px !important;
     }
     
-    /* REVISI MUTLAK: Memaksa kolom kiri dan kanan sejajar rata lurus dari garis paling atas */
     div[data-testid="stHorizontalBlock"] {
         align-items: flex-start !important;
     }
     
-    /* Menghilangkan logo link rantai bawaan Streamlit */
     .element-container:has(h1) a {
         display: none !important;
     }
     
-    /* Styling Judul Utama */
     h1 {
         color: #EE4D2D !important;
         font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -104,12 +110,10 @@ st.markdown("""
         transform: translateY(-1px);
     }
     
-    /* 1. Saat Masih Kosong (Boks Abu-abu): Beri jarak agar sejajar dengan textarea kiri */
     .placeholder-box {
         margin-top: 32px !important;
     }
     
-    /* 2. Saat Hasil Keluar (Boks Alert): Setel margin-top mendekati 0 agar posisinya naik dan sejajar sempurna dengan textarea kiri */
     div[data-testid="stAlert"] {
         margin-top: 5px !important;
     }
